@@ -1,73 +1,77 @@
-# Welcome to your Lovable project
 
-## Project info
+# CooperAI - Checkout de Produtos
 
-**URL**: https://lovable.dev/projects/4a1e81ab-a536-4f76-b10a-23460887a0a2
+Uma página de checkout moderna e responsiva para cooperativas agropecuárias, desenvolvida para ser hospedada no GitHub Pages.
 
-## How can I edit this code?
+## 🌱 Sobre o Projeto
 
-There are several ways of editing your application.
+O CooperAI é uma solução de checkout dinâmica que permite receber informações de produtos via parâmetros de URL e montar automaticamente um carrinho de compras interativo.
 
-**Use Lovable**
+## 🎨 Design
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/4a1e81ab-a536-4f76-b10a-23460887a0a2) and start prompting.
+- **Paleta de Cores:**
+  - Verde Principal: #6FB14B
+  - Verde Escuro: #344640
+  - Fundo Neutro: #F0E4D4
 
-Changes made via Lovable will be committed automatically to this repo.
+- **Características:**
+  - Layout responsivo
+  - Design rural-tech moderno
+  - Interface limpa e intuitiva
+  - Animações suaves
 
-**Use your preferred IDE**
+## 🚀 Como Usar
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### Parâmetros da URL
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+A página recebe produtos através do parâmetro `products` na URL, que deve conter um array JSON com os seguintes campos:
 
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+```json
+[
+  {
+    "id": "1",
+    "name": "Tomate Orgânico",
+    "price": 8.5,
+    "quantity": 2,
+    "unit": "kg"
+  },
+  {
+    "id": "2",
+    "name": "Alface Hidropônica",
+    "price": 4.9,
+    "quantity": 3,
+    "unit": "maço"
+  }
+]
 ```
 
-**Edit a file directly in GitHub**
+### Exemplo de URL
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+```
+https://seusite.github.io/cooperai/?products=[{"id":"1","name":"Tomate Orgânico","price":8.5,"quantity":2,"unit":"kg"},{"id":"2","name":"Alface Hidropônica","price":4.9,"quantity":3,"unit":"maço"}]
+```
 
-**Use GitHub Codespaces**
+## 📱 Recursos
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+- ✅ Carrinho dinâmico via JavaScript
+- ✅ Cálculo automático de totais
+- ✅ Design responsivo
+- ✅ Loading states
+- ✅ Estado de carrinho vazio
+- ✅ Formatação de moeda brasileira
+- ✅ Animações e micro-interações
 
-## What technologies are used for this project?
+## 🛠️ Tecnologias
 
-This project is built with:
+- HTML5
+- CSS3 (Custom Properties, Grid, Flexbox)
+- JavaScript (ES6+)
+- GitHub Pages
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+## 📦 Deploy
 
-## How can I deploy this project?
+Este projeto está configurado para ser hospedado no GitHub Pages. Basta fazer o upload do arquivo `index.html` para o repositório e ativar o GitHub Pages nas configurações.
 
-Simply open [Lovable](https://lovable.dev/projects/4a1e81ab-a536-4f76-b10a-23460887a0a2) and click on Share -> Publish.
+## 🤝 Contribuição
 
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+Desenvolvido para cooperativas agropecuárias que buscam modernizar seus processos de venda online com tecnologia acessível e eficiente.
