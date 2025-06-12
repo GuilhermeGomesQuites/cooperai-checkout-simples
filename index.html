@@ -21,6 +21,7 @@
             --cinza-claro: #f8f9fa;
             --cinza-medio: #6c757d;
             --sombra: rgba(52, 70, 64, 0.1);
+            --azul-pix: #32BCAD;
         }
 
         body {
@@ -172,11 +173,89 @@
             margin-bottom: 10px;
         }
 
+        /* Payment Section */
+        .payment-section {
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 3px solid var(--verde-principal);
+        }
+
+        .payment-title {
+            font-size: 1.4rem;
+            color: var(--verde-escuro);
+            margin-bottom: 20px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .payment-options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .payment-option {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .payment-option input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            cursor: pointer;
+        }
+
+        .payment-option-label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px 15px;
+            background: var(--cinza-claro);
+            border: 2px solid transparent;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .payment-option input[type="radio"]:checked + .payment-option-label {
+            border-color: var(--verde-principal);
+            background: rgba(111, 177, 75, 0.1);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px var(--sombra);
+        }
+
+        .payment-option-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .payment-option-name {
+            font-weight: 600;
+            color: var(--verde-escuro);
+            font-size: 0.9rem;
+        }
+
+        .payment-option-description {
+            font-size: 0.8rem;
+            color: var(--cinza-medio);
+            margin-top: 5px;
+        }
+
+        /* Credit Card Icon */
+        .credit-icon { color: #1e40af; }
+        /* Debit Card Icon */
+        .debit-icon { color: #dc2626; }
+        /* PIX Icon */
+        .pix-icon { color: var(--azul-pix); }
+
         /* Total Section */
         .total-section {
-            border-top: 3px solid var(--verde-principal);
-            padding-top: 25px;
             text-align: right;
+            margin-top: 30px;
         }
 
         .total-label {
@@ -210,7 +289,7 @@
             box-shadow: 0 5px 15px rgba(52, 70, 64, 0.3);
         }
 
-        .checkout-btn:hover {
+        .checkout-btn:hover:not(:disabled) {
             transform: translateY(-3px);
             box-shadow: 0 8px 25px rgba(52, 70, 64, 0.4);
         }
@@ -220,9 +299,31 @@
         }
 
         .checkout-btn:disabled {
-            opacity: 0.6;
+            opacity: 0.7;
             cursor: not-allowed;
             transform: none;
+        }
+
+        .checkout-btn.loading {
+            background: var(--cinza-medio);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .checkout-btn.loading::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: loading-shine 1.5s infinite;
+        }
+
+        @keyframes loading-shine {
+            0% { left: -100%; }
+            100% { left: 100%; }
         }
 
         /* Loading state */
@@ -245,6 +346,19 @@
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
+        }
+
+        /* Success Animation */
+        .success-checkmark {
+            display: inline-block;
+            font-size: 1.5rem;
+            animation: bounce 0.6s ease-in-out;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 60%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            80% { transform: translateY(-5px); }
         }
 
         /* Responsive Design */
@@ -276,6 +390,22 @@
                 border-bottom: 2px solid var(--verde-principal);
                 padding-bottom: 10px;
                 margin-bottom: 10px;
+            }
+
+            .payment-options {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+
+            .payment-option-label {
+                flex-direction: row;
+                justify-content: flex-start;
+                padding: 15px;
+            }
+
+            .payment-option-icon {
+                margin-right: 15px;
+                margin-bottom: 0;
             }
 
             .total-section {
@@ -339,6 +469,40 @@
                 <!-- Cart Items Container -->
                 <div id="cart-items" class="cart-items">
                     <!-- Items will be dynamically inserted here -->
+                </div>
+
+                <!-- Payment Section -->
+                <div class="payment-section">
+                    <h3 class="payment-title">💳 Escolha a forma de pagamento</h3>
+                    
+                    <div class="payment-options">
+                        <div class="payment-option">
+                            <input type="radio" id="credit" name="payment" value="credit" checked>
+                            <label for="credit" class="payment-option-label">
+                                <div class="payment-option-icon credit-icon">💳</div>
+                                <div class="payment-option-name">Cartão de Crédito</div>
+                                <div class="payment-option-description">À vista ou parcelado</div>
+                            </label>
+                        </div>
+                        
+                        <div class="payment-option">
+                            <input type="radio" id="debit" name="payment" value="debit">
+                            <label for="debit" class="payment-option-label">
+                                <div class="payment-option-icon debit-icon">💳</div>
+                                <div class="payment-option-name">Cartão de Débito</div>
+                                <div class="payment-option-description">Débito à vista</div>
+                            </label>
+                        </div>
+                        
+                        <div class="payment-option">
+                            <input type="radio" id="pix" name="payment" value="pix">
+                            <label for="pix" class="payment-option-label">
+                                <div class="payment-option-icon pix-icon">📱</div>
+                                <div class="payment-option-name">PIX</div>
+                                <div class="payment-option-description">Transferência instantânea</div>
+                            </label>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Total Section -->
@@ -426,25 +590,53 @@
             document.getElementById('cart-content').style.display = 'block';
         }
 
+        // Função para obter método de pagamento selecionado
+        function getSelectedPaymentMethod() {
+            const selectedPayment = document.querySelector('input[name="payment"]:checked');
+            return selectedPayment ? selectedPayment.value : 'credit';
+        }
+
+        // Função para obter nome do método de pagamento
+        function getPaymentMethodName(method) {
+            const methods = {
+                'credit': 'Cartão de Crédito',
+                'debit': 'Cartão de Débito',
+                'pix': 'PIX'
+            };
+            return methods[method] || 'Cartão de Crédito';
+        }
+
         // Função para simular finalização do pagamento
         function handleCheckout() {
             const checkoutBtn = document.getElementById('checkout-btn');
-            const originalText = checkoutBtn.textContent;
+            const paymentMethod = getSelectedPaymentMethod();
+            const paymentMethodName = getPaymentMethodName(paymentMethod);
             
+            // Desabilitar botão e adicionar classe de loading
             checkoutBtn.disabled = true;
-            checkoutBtn.textContent = 'Processando...';
+            checkoutBtn.classList.add('loading');
+            checkoutBtn.innerHTML = '⏳ Processando pagamento...';
             
-            // Simular processamento
+            // Simular processamento de 3 segundos
             setTimeout(() => {
-                alert('🎉 Pedido finalizado com sucesso!\n\nObrigado por escolher a CooperAI!\nEm breve você receberá a confirmação por email.');
-                checkoutBtn.disabled = false;
-                checkoutBtn.textContent = originalText;
-            }, 2000);
+                checkoutBtn.classList.remove('loading');
+                checkoutBtn.innerHTML = '<span class="success-checkmark">✅</span> Pagamento Aprovado!';
+                
+                // Mostrar sucesso
+                setTimeout(() => {
+                    alert(`🎉 Pedido finalizado com sucesso!\n\n💳 Método de pagamento: ${paymentMethodName}\n\nObrigado por escolher a CooperAI!\nEm breve você receberá a confirmação por email.`);
+                    
+                    // Resetar botão
+                    checkoutBtn.disabled = false;
+                    checkoutBtn.classList.remove('loading');
+                    checkoutBtn.innerHTML = 'Finalizar Pagamento';
+                }, 1000);
+            }, 3000);
         }
 
         // Inicialização da página
         document.addEventListener('DOMContentLoaded', function() {
-            // Simular loading
+            // Simular loading inicial
             setTimeout(() => {
                 const products = getURLParams();
                 renderCartItems(products);
