@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -36,7 +37,7 @@
         }
 
         .container {
-            max-width: 900px;
+            max-width: 600px;
             margin: 0 auto;
             padding: 20px;
             min-height: 100vh;
@@ -68,8 +69,8 @@
             opacity: 0.8;
         }
 
-        /* Cart Section */
-        .cart-section {
+        /* Payment Section */
+        .payment-section {
             background: var(--branco);
             border-radius: 16px;
             padding: 32px;
@@ -77,110 +78,50 @@
             margin-bottom: 24px;
         }
 
-        .cart-title {
+        .payment-title {
             font-size: 1.5rem;
             color: var(--verde-escuro);
             margin-bottom: 24px;
             font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            text-align: center;
         }
 
-        .cart-title::before {
-            content: '🛒';
-            font-size: 1.3rem;
-        }
-
-        .cart-items {
-            margin-bottom: 24px;
-        }
-
-        .cart-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 16px 20px;
-            margin-bottom: 12px;
+        /* Total Display */
+        .total-display {
             background: var(--bege-quente);
+            padding: 20px;
             border-radius: 12px;
+            margin-bottom: 32px;
+            text-align: center;
             border-left: 4px solid var(--verde-principal);
-            transition: all 0.2s ease;
         }
 
-        .cart-item:hover {
-            transform: translateX(4px);
-            box-shadow: 0 2px 8px var(--sombra);
-        }
-
-        .item-left {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-
-        .item-name {
-            font-weight: 600;
-            color: var(--verde-escuro);
+        .total-label {
             font-size: 1rem;
+            color: var(--cinza-texto);
+            margin-bottom: 8px;
+            font-weight: 500;
         }
 
-        .item-details {
-            font-size: 0.85rem;
+        .total-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--verde-escuro);
+        }
+
+        .phone-display {
+            font-size: 0.9rem;
             color: var(--cinza-texto);
+            margin-top: 8px;
             opacity: 0.8;
         }
 
-        .item-right {
-            text-align: right;
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-
-        .item-price {
-            font-size: 0.85rem;
-            color: var(--cinza-texto);
-        }
-
-        .item-subtotal {
-            font-weight: 700;
-            font-size: 1.1rem;
-            color: var(--verde-escuro);
-        }
-
-        /* Empty Cart */
-        .empty-cart {
-            text-align: center;
-            padding: 48px 20px;
-            color: var(--cinza-texto);
-            opacity: 0.7;
-        }
-
-        .empty-cart-icon {
-            font-size: 3rem;
-            margin-bottom: 16px;
-        }
-
-        /* Payment Section */
-        .payment-section {
-            margin-top: 24px;
-            padding-top: 24px;
-            border-top: 2px solid var(--bege-escuro);
-        }
-
-        .payment-title {
-            font-size: 1.2rem;
-            color: var(--verde-escuro);
-            margin-bottom: 16px;
-            font-weight: 600;
-        }
-
+        /* Payment Options */
         .payment-options {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 12px;
-            margin-bottom: 24px;
+            margin-bottom: 32px;
         }
 
         .payment-option {
@@ -227,41 +168,100 @@
             font-size: 0.85rem;
         }
 
-        .payment-option-description {
-            font-size: 0.75rem;
-            color: var(--cinza-texto);
-            margin-top: 4px;
-            opacity: 0.8;
-        }
-
-        /* Icons */
         .credit-icon { color: var(--laranja-credito); }
         .debit-icon { color: var(--roxo-debito); }
         .pix-icon { color: var(--azul-pix); }
 
-        /* Total Section */
-        .total-section {
-            background: var(--bege-quente);
-            padding: 20px;
+        /* Payment Forms */
+        .payment-form {
+            display: none;
+            background: var(--cinza-claro);
+            padding: 24px;
             border-radius: 12px;
-            margin-top: 24px;
+            margin-bottom: 24px;
         }
 
-        .total-label {
-            font-size: 1.1rem;
-            color: var(--cinza-texto);
-            margin-bottom: 8px;
+        .payment-form.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 500;
+            color: var(--verde-escuro);
+            font-size: 0.9rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid var(--bege-escuro);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.2s ease;
+            background: var(--branco);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--verde-principal);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 12px;
+        }
+
+        /* PIX Form */
+        .pix-qr {
+            text-align: center;
+            padding: 24px;
+            background: var(--branco);
+            border-radius: 12px;
+            margin-bottom: 16px;
+        }
+
+        .pix-qr-code {
+            width: 200px;
+            height: 200px;
+            background: #f0f0f0;
+            border: 2px dashed var(--azul-pix);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            font-size: 3rem;
+        }
+
+        .pix-code {
+            font-family: monospace;
+            background: var(--bege-quente);
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            word-break: break-all;
+            margin-bottom: 12px;
+        }
+
+        .copy-button {
+            background: var(--azul-pix);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
             font-weight: 500;
         }
 
-        .total-value {
-            font-size: 2rem;
-            font-weight: 800;
-            color: var(--verde-escuro);
-            margin-bottom: 20px;
-        }
-
-        /* Checkout Button - Redesenhado */
+        /* Checkout Button */
         .checkout-btn {
             width: 100%;
             padding: 16px 32px;
@@ -276,32 +276,11 @@
             text-transform: none;
             letter-spacing: 0.3px;
             box-shadow: 0 4px 16px rgba(91, 138, 58, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .checkout-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s;
         }
 
         .checkout-btn:hover:not(:disabled) {
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(91, 138, 58, 0.4);
-        }
-
-        .checkout-btn:hover:not(:disabled)::before {
-            left: 100%;
-        }
-
-        .checkout-btn:active {
-            transform: translateY(0);
         }
 
         .checkout-btn:disabled {
@@ -342,42 +321,22 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* Success Animation */
-        .success-checkmark {
-            display: inline-block;
-            font-size: 1.2rem;
-            animation: bounce 0.6s ease-in-out;
+        /* Error state */
+        .error-state {
+            text-align: center;
+            padding: 48px 20px;
+            color: var(--cinza-texto);
         }
 
-        @keyframes bounce {
-            0%, 20%, 60%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-8px); }
-            80% { transform: translateY(-4px); }
+        .error-icon {
+            font-size: 3rem;
+            margin-bottom: 16px;
         }
 
         /* Responsive Design */
         @media (max-width: 768px) {
             .container {
                 padding: 16px;
-            }
-
-            .header h1 {
-                font-size: 1.8rem;
-            }
-
-            .cart-section {
-                padding: 24px;
-            }
-
-            .cart-item {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 8px;
-            }
-
-            .item-right {
-                align-self: flex-end;
-                text-align: right;
             }
 
             .payment-options {
@@ -396,28 +355,8 @@
                 margin-bottom: 0;
             }
 
-            .checkout-btn {
-                font-size: 1rem;
-                padding: 14px 28px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .header {
-                padding: 24px 16px;
-                margin-bottom: 24px;
-            }
-
-            .header h1 {
-                font-size: 1.6rem;
-            }
-
-            .cart-section {
-                padding: 20px;
-            }
-
-            .total-value {
-                font-size: 1.8rem;
+            .form-row {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -430,79 +369,141 @@
             <p>Cooperativa Tecnológica Agro</p>
         </header>
 
-        <!-- Cart Section -->
-        <main class="cart-section">
-            <h2 class="cart-title">Seu Carrinho</h2>
+        <!-- Loading State -->
+        <div id="loading" class="loading">
+            <div class="loading-spinner"></div>
+            <p>Carregando informações do pedido...</p>
+        </div>
+
+        <!-- Error State -->
+        <div id="error-state" class="error-state" style="display: none;">
+            <div class="error-icon">⚠️</div>
+            <h3>Informações incompletas</h3>
+            <p>Esta página precisa ser acessada com os parâmetros 'total' e 'phone' na URL.</p>
+            <p style="font-size: 0.9rem; margin-top: 8px; opacity: 0.8;">
+                Exemplo: ?total=150.00&phone=11999999999
+            </p>
+        </div>
+
+        <!-- Payment Section -->
+        <main id="payment-content" class="payment-section" style="display: none;">
+            <h2 class="payment-title">Finalizar Pagamento</h2>
             
-            <!-- Loading State -->
-            <div id="loading" class="loading">
-                <div class="loading-spinner"></div>
-                <p>Carregando produtos...</p>
+            <!-- Total Display -->
+            <div class="total-display">
+                <div class="total-label">Total do pedido</div>
+                <div id="total-value" class="total-value">R$ 0,00</div>
+                <div id="phone-display" class="phone-display">📱 Telefone: <span id="customer-phone"></span></div>
             </div>
 
-            <!-- Cart Content -->
-            <div id="cart-content" style="display: none;">
-                <!-- Cart Items Container -->
-                <div id="cart-items" class="cart-items">
-                    <!-- Items will be dynamically inserted here -->
+            <!-- Payment Options -->
+            <div class="payment-options">
+                <div class="payment-option">
+                    <input type="radio" id="credit" name="payment" value="credit" checked>
+                    <label for="credit" class="payment-option-label">
+                        <div class="payment-option-icon credit-icon">💳</div>
+                        <div class="payment-option-name">Crédito</div>
+                    </label>
                 </div>
+                
+                <div class="payment-option">
+                    <input type="radio" id="debit" name="payment" value="debit">
+                    <label for="debit" class="payment-option-label">
+                        <div class="payment-option-icon debit-icon">💳</div>
+                        <div class="payment-option-name">Débito</div>
+                    </label>
+                </div>
+                
+                <div class="payment-option">
+                    <input type="radio" id="pix" name="payment" value="pix">
+                    <label for="pix" class="payment-option-label">
+                        <div class="payment-option-icon pix-icon">📱</div>
+                        <div class="payment-option-name">PIX</div>
+                    </label>
+                </div>
+            </div>
 
-                <!-- Payment Section -->
-                <div class="payment-section">
-                    <h3 class="payment-title">Forma de pagamento</h3>
-                    
-                    <div class="payment-options">
-                        <div class="payment-option">
-                            <input type="radio" id="credit" name="payment" value="credit" checked>
-                            <label for="credit" class="payment-option-label">
-                                <div class="payment-option-icon credit-icon">💳</div>
-                                <div class="payment-option-name">Crédito</div>
-                                <div class="payment-option-description">À vista ou parcelado</div>
-                            </label>
-                        </div>
-                        
-                        <div class="payment-option">
-                            <input type="radio" id="debit" name="payment" value="debit">
-                            <label for="debit" class="payment-option-label">
-                                <div class="payment-option-icon debit-icon">💳</div>
-                                <div class="payment-option-name">Débito</div>
-                                <div class="payment-option-description">À vista</div>
-                            </label>
-                        </div>
-                        
-                        <div class="payment-option">
-                            <input type="radio" id="pix" name="payment" value="pix">
-                            <label for="pix" class="payment-option-label">
-                                <div class="payment-option-icon pix-icon">📱</div>
-                                <div class="payment-option-name">PIX</div>
-                                <div class="payment-option-description">Instantâneo</div>
-                            </label>
-                        </div>
+            <!-- Credit Card Form -->
+            <div id="credit-form" class="payment-form active">
+                <h3 style="margin-bottom: 16px; color: var(--verde-escuro);">Dados do Cartão de Crédito</h3>
+                <div class="form-group">
+                    <label class="form-label" for="credit-number">Número do Cartão</label>
+                    <input type="text" id="credit-number" class="form-input" placeholder="0000 0000 0000 0000" maxlength="19">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="credit-name">Nome no Cartão</label>
+                    <input type="text" id="credit-name" class="form-input" placeholder="NOME COMO NO CARTÃO">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" for="credit-expiry">Validade</label>
+                        <input type="text" id="credit-expiry" class="form-input" placeholder="MM/AA" maxlength="5">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="credit-cvv">CVV</label>
+                        <input type="text" id="credit-cvv" class="form-input" placeholder="000" maxlength="3">
                     </div>
                 </div>
-
-                <!-- Total Section -->
-                <div class="total-section">
-                    <div class="total-label">Total do pedido</div>
-                    <div id="total-value" class="total-value">R$ 0,00</div>
-                    <button id="checkout-btn" class="checkout-btn">
-                        ✨ Finalizar Pedido
-                    </button>
+                <div class="form-group">
+                    <label class="form-label" for="credit-installments">Parcelas</label>
+                    <select id="credit-installments" class="form-input">
+                        <option value="1">1x sem juros</option>
+                        <option value="2">2x sem juros</option>
+                        <option value="3">3x sem juros</option>
+                        <option value="6">6x com juros</option>
+                        <option value="12">12x com juros</option>
+                    </select>
                 </div>
             </div>
 
-            <!-- Empty Cart State -->
-            <div id="empty-cart" class="empty-cart" style="display: none;">
-                <div class="empty-cart-icon">🛒</div>
-                <p>Seu carrinho está vazio</p>
-                <p style="font-size: 0.9rem; margin-top: 8px;">
-                    Adicione produtos através dos parâmetros da URL
-                </p>
+            <!-- Debit Card Form -->
+            <div id="debit-form" class="payment-form">
+                <h3 style="margin-bottom: 16px; color: var(--verde-escuro);">Dados do Cartão de Débito</h3>
+                <div class="form-group">
+                    <label class="form-label" for="debit-number">Número do Cartão</label>
+                    <input type="text" id="debit-number" class="form-input" placeholder="0000 0000 0000 0000" maxlength="19">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="debit-name">Nome no Cartão</label>
+                    <input type="text" id="debit-name" class="form-input" placeholder="NOME COMO NO CARTÃO">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" for="debit-expiry">Validade</label>
+                        <input type="text" id="debit-expiry" class="form-input" placeholder="MM/AA" maxlength="5">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="debit-cvv">CVV</label>
+                        <input type="text" id="debit-cvv" class="form-input" placeholder="000" maxlength="3">
+                    </div>
+                </div>
             </div>
+
+            <!-- PIX Form -->
+            <div id="pix-form" class="payment-form">
+                <div class="pix-qr">
+                    <div class="pix-qr-code">📱</div>
+                    <p style="margin-bottom: 16px; color: var(--cinza-texto);">Escaneie o QR Code ou copie o código PIX</p>
+                    <div class="pix-code" id="pix-code">
+                        00020101021126580014BR.GOV.BCB.PIX0136cooperai-pix-codigo-exemplo5204000053039865802BR5913CooperAI LTDA6008BRASILIA62070503***630445C8
+                    </div>
+                    <button class="copy-button" onclick="copyPixCode()">📋 Copiar Código</button>
+                </div>
+            </div>
+
+            <!-- Checkout Button -->
+            <button id="checkout-btn" class="checkout-btn">
+                ✨ Confirmar Pagamento
+            </button>
         </main>
     </div>
 
     <script>
+        let orderData = {
+            total: 0,
+            phone: ''
+        };
+
         // Função para formatar valor em Real brasileiro
         function formatCurrency(value) {
             return new Intl.NumberFormat('pt-BR', {
@@ -511,127 +512,240 @@
             }).format(value);
         }
 
+        // Função para formatar telefone
+        function formatPhone(phone) {
+            if (phone.length === 11) {
+                return `(${phone.substr(0,2)}) ${phone.substr(2,5)}-${phone.substr(7,4)}`;
+            }
+            return phone;
+        }
+
         // Função para obter parâmetros da URL
         function getURLParams() {
             const urlParams = new URLSearchParams(window.location.search);
-            const productsParam = urlParams.get('products');
+            const total = urlParams.get('total');
+            const phone = urlParams.get('phone');
             
-            if (productsParam) {
-                try {
-                    return JSON.parse(decodeURIComponent(productsParam));
-                } catch (e) {
-                    console.error('Erro ao parsear produtos da URL:', e);
-                    return [];
+            return { total, phone };
+        }
+
+        // Máscaras para inputs
+        function applyCardMask(input) {
+            input.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+                let formattedValue = value.match(/.{1,4}/g)?.join(' ') || value;
+                if (formattedValue !== e.target.value) {
+                    e.target.value = formattedValue;
+                }
+            });
+        }
+
+        function applyExpiryMask(input) {
+            input.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.length >= 2) {
+                    value = value.substring(0,2) + '/' + value.substring(2,4);
+                }
+                e.target.value = value;
+            });
+        }
+
+        function applyCvvMask(input) {
+            input.addEventListener('input', function(e) {
+                e.target.value = e.target.value.replace(/\D/g, '');
+            });
+        }
+
+        // Função para trocar formulário de pagamento
+        function switchPaymentForm(method) {
+            const forms = document.querySelectorAll('.payment-form');
+            forms.forEach(form => form.classList.remove('active'));
+            
+            const targetForm = document.getElementById(`${method}-form`);
+            if (targetForm) {
+                targetForm.classList.add('active');
+            }
+        }
+
+        // Função para copiar código PIX
+        function copyPixCode() {
+            const pixCode = document.getElementById('pix-code').textContent;
+            navigator.clipboard.writeText(pixCode).then(() => {
+                const button = document.querySelector('.copy-button');
+                const originalText = button.textContent;
+                button.textContent = '✅ Copiado!';
+                setTimeout(() => {
+                    button.textContent = originalText;
+                }, 2000);
+            });
+        }
+
+        // Função para validar formulário
+        function validateForm(method) {
+            if (method === 'credit' || method === 'debit') {
+                const number = document.getElementById(`${method}-number`).value;
+                const name = document.getElementById(`${method}-name`).value;
+                const expiry = document.getElementById(`${method}-expiry`).value;
+                const cvv = document.getElementById(`${method}-cvv`).value;
+
+                if (!number || number.length < 19) {
+                    alert('Por favor, insira um número de cartão válido');
+                    return false;
+                }
+                if (!name.trim()) {
+                    alert('Por favor, insira o nome do cartão');
+                    return false;
+                }
+                if (!expiry || expiry.length < 5) {
+                    alert('Por favor, insira a validade do cartão');
+                    return false;
+                }
+                if (!cvv || cvv.length < 3) {
+                    alert('Por favor, insira o CVV do cartão');
+                    return false;
                 }
             }
-            return [];
+            return true;
         }
 
-        // Função para renderizar itens do carrinho
-        function renderCartItems(products) {
-            const cartItemsContainer = document.getElementById('cart-items');
-            const totalValueElement = document.getElementById('total-value');
-            let total = 0;
+        // Função para simular chamada à API intermediária
+        async function callPaymentAPI(paymentData) {
+            console.log('Simulando chamada para API intermediária:', paymentData);
+            
+            // Simular delay da API
+            await new Promise(resolve => setTimeout(resolve, 2000));
+            
+            // Simular resposta da API
+            return {
+                success: true,
+                transactionId: 'TXN' + Date.now(),
+                message: 'Pagamento processado com sucesso'
+            };
+        }
 
-            // Limpar container
-            cartItemsContainer.innerHTML = '';
+        // Função para enviar mensagem WhatsApp (simulação)
+        async function sendWhatsAppMessage(phone, orderData, transactionId) {
+            console.log('Simulando envio de WhatsApp para:', phone);
+            console.log('Dados do pedido:', orderData);
+            console.log('ID da transação:', transactionId);
+            
+            // Aqui você faria a chamada real para sua API intermediária
+            // que enviaria a mensagem via WhatsApp
+            
+            return new Promise(resolve => {
+                setTimeout(() => {
+                    resolve({ success: true });
+                }, 1000);
+            });
+        }
 
-            if (products.length === 0) {
-                document.getElementById('loading').style.display = 'none';
-                document.getElementById('empty-cart').style.display = 'block';
+        // Função para finalizar pagamento
+        async function handleCheckout() {
+            const checkoutBtn = document.getElementById('checkout-btn');
+            const paymentMethod = document.querySelector('input[name="payment"]:checked').value;
+            
+            if (!validateForm(paymentMethod)) {
                 return;
             }
-
-            products.forEach(product => {
-                const subtotal = product.price * product.quantity;
-                total += subtotal;
-
-                const cartItem = document.createElement('div');
-                cartItem.className = 'cart-item';
-                cartItem.innerHTML = `
-                    <div class="item-left">
-                        <div class="item-name">${product.name}</div>
-                        <div class="item-details">${product.quantity} ${product.unit || 'un'} × ${formatCurrency(product.price)}</div>
-                    </div>
-                    <div class="item-right">
-                        <div class="item-subtotal">${formatCurrency(subtotal)}</div>
-                    </div>
-                `;
-
-                cartItemsContainer.appendChild(cartItem);
-            });
-
-            // Atualizar total
-            totalValueElement.textContent = formatCurrency(total);
-
-            // Mostrar conteúdo do carrinho
-            document.getElementById('loading').style.display = 'none';
-            document.getElementById('cart-content').style.display = 'block';
-        }
-
-        // Função para obter método de pagamento selecionado
-        function getSelectedPaymentMethod() {
-            const selectedPayment = document.querySelector('input[name="payment"]:checked');
-            return selectedPayment ? selectedPayment.value : 'credit';
-        }
-
-        // Função para obter nome do método de pagamento
-        function getPaymentMethodName(method) {
-            const methods = {
-                'credit': 'Cartão de Crédito',
-                'debit': 'Cartão de Débito',
-                'pix': 'PIX'
-            };
-            return methods[method] || 'Cartão de Crédito';
-        }
-
-        // Função para simular finalização do pagamento
-        function handleCheckout() {
-            const checkoutBtn = document.getElementById('checkout-btn');
-            const paymentMethod = getSelectedPaymentMethod();
-            const paymentMethodName = getPaymentMethodName(paymentMethod);
             
-            // Desabilitar botão e adicionar classe de loading
+            // Desabilitar botão e mostrar loading
             checkoutBtn.disabled = true;
             checkoutBtn.classList.add('loading');
-            checkoutBtn.innerHTML = '⏳ Processando...';
+            checkoutBtn.innerHTML = '⏳ Processando pagamento...';
             
-            // Simular processamento de 3 segundos
-            setTimeout(() => {
-                checkoutBtn.classList.remove('loading');
-                checkoutBtn.innerHTML = '<span class="success-checkmark">✅</span> Pedido Aprovado!';
+            try {
+                // Preparar dados do pagamento
+                const paymentData = {
+                    method: paymentMethod,
+                    total: orderData.total,
+                    phone: orderData.phone,
+                    timestamp: new Date().toISOString()
+                };
+
+                // Simular processamento do pagamento
+                const paymentResult = await callPaymentAPI(paymentData);
                 
-                // Mostrar sucesso
-                setTimeout(() => {
-                    alert(`🎉 Pedido finalizado com sucesso!\n\n💳 Método: ${paymentMethodName}\n\nObrigado por escolher a CooperAI!`);
+                if (paymentResult.success) {
+                    checkoutBtn.innerHTML = '📱 Enviando confirmação...';
                     
-                    // Resetar botão
-                    checkoutBtn.disabled = false;
+                    // Enviar mensagem WhatsApp
+                    await sendWhatsAppMessage(orderData.phone, orderData, paymentResult.transactionId);
+                    
+                    // Sucesso
                     checkoutBtn.classList.remove('loading');
-                    checkoutBtn.innerHTML = '✨ Finalizar Pedido';
-                }, 1000);
-            }, 3000);
+                    checkoutBtn.innerHTML = '✅ Pagamento Aprovado!';
+                    
+                    setTimeout(() => {
+                        alert(`🎉 Pagamento realizado com sucesso!\n\n💰 Valor: ${formatCurrency(orderData.total)}\n📱 Confirmação enviada para: ${formatPhone(orderData.phone)}\n🆔 ID: ${paymentResult.transactionId}\n\nObrigado por escolher a CooperAI!`);
+                        
+                        // Reset do botão
+                        checkoutBtn.disabled = false;
+                        checkoutBtn.classList.remove('loading');
+                        checkoutBtn.innerHTML = '✨ Confirmar Pagamento';
+                    }, 1500);
+                }
+            } catch (error) {
+                console.error('Erro no pagamento:', error);
+                checkoutBtn.classList.remove('loading');
+                checkoutBtn.innerHTML = '❌ Erro no pagamento';
+                alert('Erro ao processar pagamento. Tente novamente.');
+                
+                setTimeout(() => {
+                    checkoutBtn.disabled = false;
+                    checkoutBtn.innerHTML = '✨ Confirmar Pagamento';
+                }, 2000);
+            }
         }
 
         // Inicialização da página
         document.addEventListener('DOMContentLoaded', function() {
             // Simular loading inicial
             setTimeout(() => {
-                const products = getURLParams();
-                renderCartItems(products);
+                const { total, phone } = getURLParams();
+                
+                if (!total || !phone) {
+                    document.getElementById('loading').style.display = 'none';
+                    document.getElementById('error-state').style.display = 'block';
+                    return;
+                }
+                
+                // Salvar dados do pedido
+                orderData.total = parseFloat(total);
+                orderData.phone = phone;
+                
+                // Atualizar interface
+                document.getElementById('total-value').textContent = formatCurrency(orderData.total);
+                document.getElementById('customer-phone').textContent = formatPhone(phone);
+                
+                // Mostrar conteúdo
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('payment-content').style.display = 'block';
             }, 1000);
 
-            // Adicionar event listener ao botão de checkout
+            // Aplicar máscaras aos inputs
+            applyCardMask(document.getElementById('credit-number'));
+            applyCardMask(document.getElementById('debit-number'));
+            applyExpiryMask(document.getElementById('credit-expiry'));
+            applyExpiryMask(document.getElementById('debit-expiry'));
+            applyCvvMask(document.getElementById('credit-cvv'));
+            applyCvvMask(document.getElementById('debit-cvv'));
+
+            // Event listeners para trocar forma de pagamento
+            document.querySelectorAll('input[name="payment"]').forEach(radio => {
+                radio.addEventListener('change', function() {
+                    switchPaymentForm(this.value);
+                });
+            });
+
+            // Event listener para botão de checkout
             document.getElementById('checkout-btn').addEventListener('click', handleCheckout);
         });
 
-        // Exemplo de uso (para demonstração):
-        // Para testar, use uma URL como:
-        // index.html?products=[{"id":"1","name":"Tomate Orgânico","price":8.5,"quantity":2,"unit":"kg"},{"id":"2","name":"Alface Hidropônica","price":4.9,"quantity":3,"unit":"maço"}]
+        // Exemplo de uso:
+        // index.html?total=150.50&phone=11999999999
         
         console.log('CooperAI Checkout carregado com sucesso!');
-        console.log('Para testar, adicione produtos via parâmetro URL "products" com um array JSON de produtos.');
-        console.log('Exemplo de produto: {"id":"1","name":"Tomate Orgânico","price":8.5,"quantity":2,"unit":"kg"}');
+        console.log('URL de exemplo: ?total=150.50&phone=11999999999');
     </script>
 </body>
 </html>
