@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -608,38 +607,62 @@
             return true;
         }
 
-        // Função para simular chamada à API intermediária
+        // Função para chamar a API real do Google Apps Script
         async function callPaymentAPI(paymentData) {
-            console.log('Simulando chamada para API intermediária:', paymentData);
+            console.log('Enviando dados para API do Google Apps Script:', paymentData);
             
-            // Simular delay da API
-            await new Promise(resolve => setTimeout(resolve, 2000));
-            
-            // Simular resposta da API
-            return {
-                success: true,
-                transactionId: 'TXN' + Date.now(),
-                message: 'Pagamento processado com sucesso'
+            // Preparar dados para a API
+            const apiPayload = {
+                phone: paymentData.phone,
+                template: "confirmacaopagamento",
+                params: [
+                    {
+                        type: "text",
+                        text: formatCurrency(paymentData.total)
+                    },
+                    {
+                        type: "text", 
+                        text: getPaymentMethodName(paymentData.method)
+                    }
+                ]
             };
+
+            console.log('Payload da API:', apiPayload);
+
+            try {
+                const response = await fetch('https://script.google.com/macros/s/AKfycbyPXYFSVeeEAE0asClrNFCqrxWZUWtYOjz9ftU6W2ANJrTjrNd4JImZEyoUMgjDvPTl/exec', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(apiPayload)
+                });
+
+                const result = await response.json();
+                console.log('Resposta da API:', result);
+
+                return {
+                    success: response.ok,
+                    data: result,
+                    transactionId: 'TXN' + Date.now()
+                };
+            } catch (error) {
+                console.error('Erro na chamada da API:', error);
+                throw error;
+            }
         }
 
-        // Função para enviar mensagem WhatsApp (simulação)
-        async function sendWhatsAppMessage(phone, orderData, transactionId) {
-            console.log('Simulando envio de WhatsApp para:', phone);
-            console.log('Dados do pedido:', orderData);
-            console.log('ID da transação:', transactionId);
-            
-            // Aqui você faria a chamada real para sua API intermediária
-            // que enviaria a mensagem via WhatsApp
-            
-            return new Promise(resolve => {
-                setTimeout(() => {
-                    resolve({ success: true });
-                }, 1000);
-            });
+        // Função para converter método de pagamento para nome amigável
+        function getPaymentMethodName(method) {
+            const methodNames = {
+                'credit': 'Cartão de Crédito',
+                'debit': 'Cartão de Débito', 
+                'pix': 'PIX'
+            };
+            return methodNames[method] || method;
         }
 
-        // Função para finalizar pagamento
+        // Função para finalizar pagamento (atualizada)
         async function handleCheckout() {
             const checkoutBtn = document.getElementById('checkout-btn');
             const paymentMethod = document.querySelector('input[name="payment"]:checked').value;
@@ -662,33 +685,30 @@
                     timestamp: new Date().toISOString()
                 };
 
-                // Simular processamento do pagamento
+                // Chamar API real do Google Apps Script
                 const paymentResult = await callPaymentAPI(paymentData);
                 
                 if (paymentResult.success) {
-                    checkoutBtn.innerHTML = '📱 Enviando confirmação...';
-                    
-                    // Enviar mensagem WhatsApp
-                    await sendWhatsAppMessage(orderData.phone, orderData, paymentResult.transactionId);
-                    
                     // Sucesso
                     checkoutBtn.classList.remove('loading');
                     checkoutBtn.innerHTML = '✅ Pagamento Aprovado!';
                     
                     setTimeout(() => {
-                        alert(`🎉 Pagamento realizado com sucesso!\n\n💰 Valor: ${formatCurrency(orderData.total)}\n📱 Confirmação enviada para: ${formatPhone(orderData.phone)}\n🆔 ID: ${paymentResult.transactionId}\n\nObrigado por escolher a CooperAI!`);
+                        alert(`🎉 Pagamento realizado com sucesso!\n\n💰 Valor: ${formatCurrency(orderData.total)}\n📱 Confirmação enviada via WhatsApp para: ${formatPhone(orderData.phone)}\n💳 Método: ${getPaymentMethodName(paymentMethod)}\n🆔 ID: ${paymentResult.transactionId}\n\nObrigado por escolher a CooperAI!`);
                         
                         // Reset do botão
                         checkoutBtn.disabled = false;
                         checkoutBtn.classList.remove('loading');
                         checkoutBtn.innerHTML = '✨ Confirmar Pagamento';
                     }, 1500);
+                } else {
+                    throw new Error('Falha no processamento do pagamento');
                 }
             } catch (error) {
                 console.error('Erro no pagamento:', error);
                 checkoutBtn.classList.remove('loading');
                 checkoutBtn.innerHTML = '❌ Erro no pagamento';
-                alert('Erro ao processar pagamento. Tente novamente.');
+                alert('Erro ao processar pagamento. Verifique sua conexão e tente novamente.');
                 
                 setTimeout(() => {
                     checkoutBtn.disabled = false;
