@@ -592,7 +592,7 @@
             // Preparar dados para a API
             const apiPayload = {
                 phone: paymentData.phone,
-                template: "confirmacaopagamento",
+                template: "confirmacaopagamentocooperia",
                 params: [
                     {
                         type: "text",
@@ -635,7 +635,7 @@
                 console.log('Tentativa 2: Usando GET com parâmetros');
                 const params = new URLSearchParams({
                     phone: paymentData.phone,
-                    template: 'confirmacaopagamento',
+                    template: 'confirmacaopagamentocooperia',
                     valor: formatCurrency(paymentData.total),
                     metodo: getPaymentMethodName(paymentData.method)
                 });
@@ -662,7 +662,7 @@
                 // Criar um iframe escondido para fazer a requisição
                 const iframe = document.createElement('iframe');
                 iframe.style.display = 'none';
-                iframe.src = `https://script.google.com/macros/s/AKfycbyPXYFSVeeEAE0asClrNFCqrxWZUWtYOjz9ftU6W2ANJrTjrNd4JImZEyoUMgjDvPTl/exec?phone=${encodeURIComponent(paymentData.phone)}&template=confirmacaopagamento&valor=${encodeURIComponent(formatCurrency(paymentData.total))}&metodo=${encodeURIComponent(getPaymentMethodName(paymentData.method))}`;
+                iframe.src = `https://script.google.com/macros/s/AKfycbyPXYFSVeeEAE0asClrNFCqrxWZUWtYOjz9ftU6W2ANJrTjrNd4JImZEyoUMgjDvPTl/exec?phone=${encodeURIComponent(paymentData.phone)}&template=confirmacaopagamentocooperia&valor=${encodeURIComponent(formatCurrency(paymentData.total))}&metodo=${encodeURIComponent(getPaymentMethodName(paymentData.method))}`;
                 
                 document.body.appendChild(iframe);
                 
