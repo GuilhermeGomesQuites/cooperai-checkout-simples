@@ -412,14 +412,6 @@
                         <div class="payment-option-name">Débito</div>
                     </label>
                 </div>
-                
-                <div class="payment-option">
-                    <input type="radio" id="pix" name="payment" value="pix">
-                    <label for="pix" class="payment-option-label">
-                        <div class="payment-option-icon pix-icon">📱</div>
-                        <div class="payment-option-name">PIX</div>
-                    </label>
-                </div>
             </div>
 
             <!-- Credit Card Form -->
@@ -475,18 +467,6 @@
                         <label class="form-label" for="debit-cvv">CVV</label>
                         <input type="text" id="debit-cvv" class="form-input" placeholder="000" maxlength="3">
                     </div>
-                </div>
-            </div>
-
-            <!-- PIX Form -->
-            <div id="pix-form" class="payment-form">
-                <div class="pix-qr">
-                    <div class="pix-qr-code">📱</div>
-                    <p style="margin-bottom: 16px; color: var(--cinza-texto);">Escaneie o QR Code ou copie o código PIX</p>
-                    <div class="pix-code" id="pix-code">
-                        00020101021126580014BR.GOV.BCB.PIX0136cooperai-pix-codigo-exemplo5204000053039865802BR5913CooperAI LTDA6008BRASILIA62070503***630445C8
-                    </div>
-                    <button class="copy-button" onclick="copyPixCode()">📋 Copiar Código</button>
                 </div>
             </div>
 
@@ -564,19 +544,6 @@
             if (targetForm) {
                 targetForm.classList.add('active');
             }
-        }
-
-        // Função para copiar código PIX
-        function copyPixCode() {
-            const pixCode = document.getElementById('pix-code').textContent;
-            navigator.clipboard.writeText(pixCode).then(() => {
-                const button = document.querySelector('.copy-button');
-                const originalText = button.textContent;
-                button.textContent = '✅ Copiado!';
-                setTimeout(() => {
-                    button.textContent = originalText;
-                }, 2000);
-            });
         }
 
         // Função para validar formulário
@@ -746,7 +713,7 @@
                     checkoutBtn.innerHTML = '✅ Pagamento Aprovado!';
                     
                     setTimeout(() => {
-                        alert(`🎉 Pagamento realizado com sucesso!\n\n💰 Valor: ${formatCurrency(orderData.total)}\n📱 Confirmação enviada via WhatsApp para: ${formatPhone(orderData.phone)}\n💳 Método: ${getPaymentMethodName(paymentMethod)}\n🆔 ID: ${paymentResult.transactionId}\n\nObrigado por escolher a CooperAI!\n\nNota: Devido a restrições de CORS, a confirmação pode levar alguns minutos para chegar.`);
+                        alert(`🎉 Pagamento realizado com sucesso!\n\n💰 Valor: ${formatCurrency(orderData.total)}\n📱 Confirmação enviada via WhatsApp para: ${formatPhone(orderData.phone)}\n💳 Método: ${getPaymentMethodName(paymentMethod)}\n🆔 ID: ${paymentResult.transactionId}\n\nObrigado por escolher a CooperAI!`);
                         
                         // Reset do botão
                         checkoutBtn.disabled = false;
